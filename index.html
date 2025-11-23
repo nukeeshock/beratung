@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Techniker Bewerbungsprofi</title>
+  <style>
+    :root {
+      --primary: #1E3A8A;
+      --accent: #F59E0B;
+      --bg: #F3F4F6;
+      --text: #111827;
+      --muted: #4B5563;
+      --card: #ffffff;
+      --shadow: 0 12px 40px rgba(17, 24, 39, 0.08);
+      --radius: 14px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(243, 244, 246, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(17, 24, 39, 0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: var(--transition);
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--primary);
+      background: rgba(30, 58, 138, 0.08);
+    }
+
+    .burger {
+      display: none;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .burger span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 4px 0;
+      background: var(--text);
+      border-radius: 99px;
+      transition: var(--transition);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    h1, h2, h3, h4 {
+      color: var(--text);
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+      gap: 32px;
+      padding-top: 60px;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+    }
+
+    .hero-text .subtitle {
+      font-size: 1.1rem;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .chip {
+      background: rgba(30, 58, 138, 0.08);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 45px rgba(30, 58, 138, 0.18);
+    }
+
+    .btn-text {
+      color: var(--primary);
+      background: transparent;
+      padding: 10px 12px;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 32px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17, 24, 39, 0.06);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 50px rgba(17, 24, 39, 0.12);
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.14);
+      color: #B45309;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      position: relative;
+    }
+
+    .step {
+      background: var(--card);
+      padding: 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17, 24, 39, 0.06);
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .faq-item {
+      border-radius: var(--radius);
+      background: var(--card);
+      margin-bottom: 10px;
+      border: 1px solid rgba(17, 24, 39, 0.06);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .faq-answer {
+      padding: 0 18px 18px;
+      color: var(--muted);
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .contact-form {
+      background: var(--card);
+      padding: 22px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17, 24, 39, 0.06);
+      max-width: 720px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(17, 24, 39, 0.14);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: #fff;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .error {
+      color: #B91C1C;
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .success {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #065F46;
+      border-radius: 10px;
+      font-weight: 700;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    footer {
+      background: #e5e7eb;
+      padding: 22px 24px 40px;
+      margin-top: 40px;
+      border-top: 1px solid rgba(17, 24, 39, 0.08);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 12px;
+    }
+
+    .muted-text {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .info-box {
+      background: #fff;
+      padding: 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(17, 24, 39, 0.08);
+      box-shadow: var(--shadow);
+      margin-top: 12px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 12px 16px;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        right: 16px;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        min-width: 200px;
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .burger {
+        display: block;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">Techniker Bewerbungsprofi</div>
+      <button class="burger" aria-label="Menü öffnen oder schließen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav-links" aria-label="Hauptnavigation">
+        <a href="#start">Start</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#beispiele">Beispiele</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="start" class="hero fade-in">
+      <div class="hero-text">
+        <h1>Starke Bewerbungen für starke Techniker.</h1>
+        <p class="subtitle">Ich optimiere Lebenslauf, Anschreiben und Profiltexte für technische Fachkräfte – klar, ehrlich und ohne Bürokraten-Blabla.</p>
+        <div class="chips">
+          <div class="chip">Spezialisiert auf Elektro, Mechatronik, Service und Industrie</div>
+          <div class="chip">Komplettpaket mit Lebenslauf, Anschreiben &amp; Profiltext</div>
+          <div class="chip">Planbare Preise und schnelle Bearbeitung</div>
+        </div>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="#kontakt">Jetzt Unterlagen verbessern</a>
+          <a class="btn btn-text" href="#leistungen">Mehr über die Leistungen</a>
+        </div>
+      </div>
+      <div class="hero-visual card">
+        <h3>Technische Profile im Fokus</h3>
+        <p>Elektriker · Mechatroniker · Servicetechniker · Instandhalter · Industriemeister</p>
+        <ul>
+          <li>Klare Struktur statt Floskel-Overload.</li>
+          <li>Relevante Projekte und Zertifikate sichtbar machen.</li>
+          <li>Direkte Sprache, die zu Werkhalle und Büro passt.</li>
+        </ul>
+        <p><strong>Ergebnis:</strong> Unterlagen, die Fachabteilungen sofort verstehen.</p>
+      </div>
+    </section>
+
+    <section id="leistungen" class="fade-in">
+      <div class="section-head">
+        <h2>Leistungen &amp; Pakete</h2>
+        <p>Bewerbungsoptimierung speziell für technische Berufe – praxisnah, ehrlich und mit Fokus auf das Wesentliche.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Komplettpaket Standard</h3>
+          <div class="price">149 €</div>
+          <ul>
+            <li>Neuer, professioneller Lebenslauf (PDF)</li>
+            <li>Individuelles Anschreiben</li>
+            <li>Profiltext für LinkedIn oder Jobportale</li>
+            <li>Kurze Bewerbungsstrategie (1 Seite)</li>
+            <li>1 Korrekturschleife inklusive</li>
+          </ul>
+          <p class="muted-text">Bearbeitungszeit: ca. 3–5 Werktage</p>
+          <a class="btn btn-primary" href="#kontakt">Standard-Paket anfragen</a>
+        </div>
+        <div class="card">
+          <div class="badge">Empfohlen</div>
+          <h3>Komplettpaket Pro</h3>
+          <div class="price">199 €</div>
+          <ul>
+            <li>Alles aus dem Standard-Paket</li>
+            <li>Feinschliff der Formulierungen für Wunsch-Stellen</li>
+            <li>Priorisierte Bearbeitung</li>
+            <li>Optional: Express 24h (+49 €)</li>
+          </ul>
+          <p class="muted-text">Beliebt bei Wechsel in höher verantwortliche Positionen.</p>
+          <a class="btn btn-primary" href="#kontakt">Pro-Paket anfragen</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ablauf" class="fade-in">
+      <div class="section-head">
+        <h2>So läuft es ab</h2>
+        <p>Schritt für Schritt zu Unterlagen, die überzeugen.</p>
+      </div>
+      <div class="timeline">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h4>Anfrage &amp; Paket wählen</h4>
+          <p>Du suchst dir dein Paket aus und schickst mir eine kurze Anfrage über das Formular.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h4>Unterlagen &amp; Fragen</h4>
+          <p>Du sendest mir deinen bisherigen Lebenslauf und beantwortest ein paar gezielte Fragen.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4>Ausarbeitung</h4>
+          <p>Ich erstelle oder überarbeite deine Unterlagen – praxisnah, ehrlich und technisch sauber.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h4>Feinschliff &amp; PDF</h4>
+          <p>Du bekommst alles als PDF, wir passen bei Bedarf einmal nach – fertig.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="beispiele" class="fade-in">
+      <div class="section-head">
+        <h2>Was ich für dich verbessern kann</h2>
+        <p>Typische Probleme technischer Bewerbungen: Lebenslauf zu lang oder unübersichtlich, wichtige Zertifikate fehlen, Aufgaben klingen wie aus einer Vorlage.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Mehr Struktur im Lebenslauf</h3>
+          <p>Klare Gliederung, technische Schwerpunkte, relevante Projekte – damit Personal und Fachabteilung auf einen Blick sehen, was du kannst.</p>
+        </div>
+        <div class="card">
+          <h3>Klarer roter Faden</h3>
+          <p>Lücken und Wechsel werden verständlich erklärt, ohne schwammige Floskeln.</p>
+        </div>
+        <div class="card">
+          <h3>Texte, die nicht peinlich sind</h3>
+          <p>Direkte, ehrliche Formulierungen statt übertriebenem Marketing-Sprech.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="fade-in">
+      <div class="section-head">
+        <h2>Häufige Fragen</h2>
+        <p>Klicke auf eine Frage, um die Antwort zu sehen.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq1">Für welche Berufe ist das Angebot gedacht?<span aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq1">Für technische Fachkräfte – z. B. Elektriker, Mechatroniker, Servicetechniker, Instandhalter, Industriemeister und ähnliche Profile.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq2">Schreibst du auch Bewerbungen für ganz andere Berufe?<span aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq2">Mein Fokus liegt klar auf technischen Profilen. In Einzelfällen können wir zusammen schauen, ob es passt.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq3">Wie schnell bekomme ich meine Unterlagen?<span aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq3">In der Regel innerhalb von 3–5 Werktagen, beim Pro-Paket mit Express-Option auch schneller.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq4">Kannst du mir einen Job vermitteln?<span aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq4">Nein. Ich optimiere deine Unterlagen – die Bewerbung verschickst du selbst.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq5">Wie läuft die Bezahlung?<span aria-hidden="true">+</span></button>
+          <div class="faq-answer" id="faq5">In der Regel per Vorkasse – z. B. per Überweisung oder Online-Zahlung. Die Details klären wir nach deiner Anfrage.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="fade-in">
+      <div class="section-head">
+        <h2>Kontakt &amp; Anfrage</h2>
+        <p>Schreib mir kurz, wer du bist und wie ich dir helfen kann. Ich melde mich in der Regel innerhalb von 1–2 Werktagen.</p>
+      </div>
+      <form class="contact-form" novalidate>
+        <div class="form-grid">
+          <div>
+            <label for="name">Vollständiger Name *</label>
+            <input type="text" id="name" name="name" required />
+            <div class="error" data-error-for="name"></div>
+          </div>
+          <div>
+            <label for="email">E-Mail-Adresse *</label>
+            <input type="email" id="email" name="email" required />
+            <div class="error" data-error-for="email"></div>
+          </div>
+          <div>
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+          <div>
+            <label for="paket">Gewünschtes Paket</label>
+            <select id="paket" name="paket">
+              <option>Standard</option>
+              <option>Pro</option>
+              <option>unsicher – bitte beraten</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <label for="position">Aktueller Beruf / Zielposition</label>
+          <input type="text" id="position" name="position" />
+        </div>
+        <div style="margin-top:14px;">
+          <label for="message">Freitext-Nachricht</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <div style="margin-top:14px;">
+          <button type="submit" class="btn btn-primary">Anfrage senden</button>
+        </div>
+        <div class="success" id="success" style="display:none;"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <div class="muted-text">© <span id="year"></span> Techniker Bewerbungsprofi</div>
+        <div class="muted-text">Hinweis: Keine Rechtsberatung, keine Arbeitsvermittlung.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div id="impressum" class="info-box" aria-label="Impressum">
+      <h4>Impressum (Platzhalter)</h4>
+      <p>Hier steht später das vollständige Impressum mit Unternehmensdaten und verantwortlicher Person.</p>
+    </div>
+    <div id="datenschutz" class="info-box" aria-label="Datenschutz">
+      <h4>Datenschutz (Platzhalter)</h4>
+      <p>Hinweise zum Umgang mit personenbezogenen Daten werden hier ergänzt. Keine Weitergabe an Dritte ohne Zustimmung.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const targetId = link.getAttribute('href');
+        const targetEl = document.querySelector(targetId);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+          navLinks.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Mobile navigation toggle
+    const burger = document.querySelector('.burger');
+    const navLinks = document.querySelector('.nav-links');
+
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      const expanded = navLinks.classList.contains('open');
+      burger.setAttribute('aria-expanded', expanded);
+    });
+
+    // FAQ accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      const answer = item.querySelector('.faq-answer');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        faqItems.forEach(i => {
+          i.classList.remove('active');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Form handling
+    const form = document.querySelector('.contact-form');
+    const successBox = document.getElementById('success');
+
+    const showError = (field, message) => {
+      const errorEl = form.querySelector(`[data-error-for="${field.id}"]`);
+      if (errorEl) {
+        errorEl.textContent = message;
+      }
+      field.setAttribute('aria-invalid', message ? 'true' : 'false');
+    };
+
+    const validateField = field => {
+      if (field.required && !field.value.trim()) {
+        showError(field, 'Pflichtfeld ausfüllen.');
+        return false;
+      }
+      if (field.type === 'email' && field.value) {
+        const valid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(field.value);
+        if (!valid) {
+          showError(field, 'Bitte eine gültige E-Mail-Adresse eingeben.');
+          return false;
+        }
+      }
+      showError(field, '');
+      return true;
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      successBox.style.display = 'none';
+      const requiredFields = [form.name, form.email];
+      const allValid = requiredFields.every(validateField);
+      if (!allValid) return;
+
+      const formData = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        paket: form.paket.value,
+        position: form.position.value.trim(),
+        message: form.message.value.trim()
+      };
+      console.log('Anfrage gesendet:', formData);
+      successBox.textContent = 'Danke für deine Anfrage – ich melde mich so schnell wie möglich bei dir.';
+      successBox.style.display = 'block';
+      form.reset();
+    });
+
+    form.querySelectorAll('input[required], textarea[required]').forEach(field => {
+      field.addEventListener('blur', () => validateField(field));
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
